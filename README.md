@@ -15,7 +15,14 @@ DATABASE_URL="file:./dev.db"
 From the root of the project:
 
 ```bash
-yarn && yarn dev
+# Install npm dependencies
+yarn
+
+# Generate types for Schema and push to db
+yarn prisma generate && yarn prisma db push
+
+# Start Next.js server
+yarn dev
 ```
 
 The project home page should now open at `http://localhost:3000`
