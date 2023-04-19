@@ -1,38 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Reading List Coding Assessment
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This coding assessment is built using Next.js, React, Prisma, Typescript, and SQLite to create a reading list management web app. Testing is built with React Testing Libray and Jest.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Installation and Setup
+
+Create a `.env` file with the following:
+
+```
+DATABASE_URL="file:./dev.db"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+From the root of the project:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn && yarn dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The project home page should now open at `http://localhost:3000`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Running tests
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Test are currently run either with:
+* `yarn jest` - runs the whole suite once
+* `yarn test` - runs the whole suite in watch mode and re-runs when test files change
 
-## Learn More
+## Code Structure
 
-To learn more about Next.js, take a look at the following resources:
+* `./__mocks__` - Folder for Jest mocks
+* `./prisma` - Folder containing files for DB Schema and migrations
+* `./src` - Folder containing source JS/CSS files
+  * `./src/components` - Folder for components for pages
+    * Each component is a folder containing an `index.tsx` file
+    * Any custom css is included in a `styles.module.css` file in that folder
+    * Any tests are included in a `index.test.tsx` file
+  * `./src/pages` - Folder containing Next.js page and API files
+    * `./src/pages/api/*` - Folders and files for API routes
+    * `./src/pages/*` - Folders and files for all other routes/pages
+  * `./src/styles` - Global css
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My One Additional Feature
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For my additional feature, I decided to add the ability to add reading notes to a book in a reading list. I defined a new one-to-many
+relationship between a list item and a note, and then added new UI in React for it. The notes section could be used to track a user's
+thoughts as they read through a book, and displays timestamps to help emphasis a timeline of the thoughts.
 
-## Deploy on Vercel
+## My Thoughts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I tried to maintain a more ad-hoc approach to how data and UI are managed in the app. I personally have always preferred apps that seem
+to update instantaneously and have more intuitive ways of updating data instead of the standard modal and/or form every time. I took the
+time to try and show multiple different ways of approaching data management through more unique UI tricks while still maintaining strong
+typing and proper state management.

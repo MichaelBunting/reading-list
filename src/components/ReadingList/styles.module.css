@@ -1,0 +1,19 @@
+.addBook {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #d4d4d4;
+  opacity: 0;
+  color: #171717;
+  font-family: var(--lato);
+  pointer-events: none;
+  transition: .2s ease-in-out;
+}
+
+.active {
+  top: 0;
+  opacity: 1;
+  pointer-events: all;
+}

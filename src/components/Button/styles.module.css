@@ -1,0 +1,37 @@
+.btn {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background-color: #404040;
+  transition: .2s ease-in-out;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #525252;
+}
+
+.btn--light {
+  background-color: #a3a3a3;
+}
+.btn--light:hover {
+  background-color: #78716c;
+}
+
+.btn--danger {
+  background-color: #7f1d1d;
+}
+.btn--danger:hover {
+  background-color: #991b1b;
+}
+
+.btn--sm {
+  font-size: 11px;
+  width: auto;
+  padding: 2px 20px;
+}

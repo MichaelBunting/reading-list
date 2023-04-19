@@ -3,17 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 38, 38, 38;
+  --background-end-rgb: 58, 58, 58;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: var(--lato);
 }
 
 body {
@@ -24,4 +23,60 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.skeleton {
+  position: relative;
+  height: 10px;
+  margin: 20px 0;
+}
+
+.skeleton::before,
+.skeleton::after {
+  content: '';
+  position: absolute;
+  background: rgba(var(--foreground-rgb), 0.3);
+}
+
+.skeleton::before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+.skeleton::after {
+  width: calc(100% - 20px);
+  height: 10px;
+  border-radius: 10px;
+  top: 0;
+  left: 20px;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  background: rgba(var(--foreground-rgb), 0.3);
+  transition: .2s ease-in-out;
+}
+
+.ReactModal__Content {
+  transform: translateY(-100px);
+  transition: .2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--after-open .ReactModal__Content {
+  transform: translateY(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Overlay--before-close .ReactModal__Content {
+  transform: translateY(-100px);
 }

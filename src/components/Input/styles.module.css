@@ -1,0 +1,30 @@
+.input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgba(var(--foreground-rgb), 0.3);
+  outline: none;
+  padding: 5px 5px;
+  color: var(--foreground-rgb);
+}
+
+.input::placeholder {
+  color: rgba(var(--foreground-rgb), 0.6);
+}
+
+.input:focus {
+  border-bottom-color: var(--foreground-rgb);
+}
+
+.input--light {
+  border-bottom-color: rgba(38, 38, 38, 0.4);
+  color: #262626;
+}
+
+.input--light::placeholder {
+  color: rgba(38, 38, 38, 0.8);
+}
+
+.input--light:focus {
+  border-bottom-color: rgba(38, 38, 38, 0.8);
+}
