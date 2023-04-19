@@ -75,13 +75,18 @@ const ListPageBook = ({ book, handleDeleteBook }: ListPageBookProps) => {
   const noteField = useRef<HTMLTextAreaElement>(null);
 
   const handleUpdateBook = async () => {
-    await fetch(`/api/list/${book.id}/book/${book.book?.id}`, {
+    const updateBookRequest = await fetch(`/api/list/${book.id}/book/${book.book?.id}`, {
       method: 'PUT',
       body: JSON.stringify(bookData),
       headers: {
         'Content-Type': 'application/json',
       },
     });
+    
+    if (updateBookRequest.status !== 200) {
+      const updateBookResponse = await updateBookRequest.json();
+      alert(`Error updating book: \n ${updateBookResponse.msg}`);
+    }
   };
 
   const handleUpdateBookState = (e: React.FocusEvent<HTMLElement>, dataKey: keyof BookReducerState) => {
@@ -108,6 +113,9 @@ const ListPageBook = ({ book, handleDeleteBook }: ListPageBookProps) => {
       if (deleteBookResponse.success) {
         handleDeleteBook(deleteBookResponse.book);
       }
+    } else {
+      const deleteBookResponse = await deleteBookRequest.json();
+      alert(`Error deleting book: \n ${deleteBookResponse.msg}`);
     }
   }
 
@@ -139,6 +147,13 @@ const ListPageBook = ({ book, handleDeleteBook }: ListPageBookProps) => {
         'Content-Type': 'application/json',
       },
     });
+
+    if (addNoteRequest.status !== 200) {
+      const addNoteResponse = await addNoteRequest.json();
+      alert(`Error adding new note: \n ${addNoteResponse.msg}`);
+      return;
+    }
+
     const addNoteResponse = await addNoteRequest.json();
 
     if (addNoteResponse.success) {

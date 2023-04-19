@@ -87,13 +87,18 @@ export default function List({ list }: ListProps) {
   const handleEditingName = async () => {
     if (isEditingName) {
       setIsEditingName(false);
-      await fetch(`/api/list/${list?.id}`, {
+      const editNameRequest = await fetch(`/api/list/${list?.id}`, {
         method: 'PATCH',
         body: JSON.stringify({ name: listName }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+      if (editNameRequest.status !== 200) {
+        const editNameResponse = await editNameRequest.json();
+        alert(`Error updating name: \n ${editNameResponse.msg}`);
+      }
     } else {
       setIsEditingName(true);
     }
@@ -112,6 +117,13 @@ export default function List({ list }: ListProps) {
           'Content-Type': 'application/json',
         },
       });
+
+      if (addBookToListRequest.status !== 200) {
+        const addBookToListResponse = await addBookToListRequest.json();
+        alert(`Error adding book to list: \n ${addBookToListResponse.msg}`);
+        return;
+      }
+
       const addBookToListResponse = await addBookToListRequest.json();
 
       if (addBookToListResponse.success) {
@@ -138,6 +150,9 @@ export default function List({ list }: ListProps) {
 
     if (deleteListRequest.status === 200) {
       router.push('/');
+    } else {
+      const deleteListResponse = await deleteListRequest.json();
+      alert(`Error deleting list: \n ${deleteListResponse.msg}`);
     }
   };
 
@@ -154,7 +169,10 @@ export default function List({ list }: ListProps) {
     const exportDataRequest = await fetch(`/api/list/${list?.id}`);
     const exportDataResponse = await exportDataRequest.json();
     
-    if (!exportDataResponse.success) return;
+    if (!exportDataResponse.success) {
+      alert(`Error exporting data: \n ${exportDataResponse.msg}`);
+      return;
+    }
 
     const listResponse = exportDataResponse.list as ListInclude;
 

@@ -4,7 +4,7 @@ type ButtonProps = {
   type: "button" | "submit" | "reset" | undefined;
   className?: React.HTMLProps<HTMLButtonElement>['className'];
   children?: React.HTMLProps<HTMLButtonElement>['children'];
-  onClick: React.HTMLProps<HTMLButtonElement>['onClick'];
+  onClick?: React.HTMLProps<HTMLButtonElement>['onClick'];
   variant?: "dark" | "light" | "danger";
   size?: "sm";
 };

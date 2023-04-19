@@ -42,6 +42,13 @@ export default function Home({ lists }: HomeProps) {
           'Content-Type': 'application/json',
         },
       });
+
+      if (createListRequest.status !== 200) {
+        const createListResponse = await createListRequest.json();
+        alert(`Error creating list: \n ${createListResponse.msg}`);
+        return;
+      }
+
       const createListResponse = await createListRequest.json();
 
       if (createListResponse.success && createListResponse.list) {

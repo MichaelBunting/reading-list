@@ -78,6 +78,13 @@ const ReadingList = ({ list }: ReadingListProps) => {
           'Content-Type': 'application/json',
         },
       });
+
+      if (addBookToListRequest.status !== 200) {
+        const addBookToListResponse = await addBookToListRequest.json();
+        alert(`Error adding book to list: \n ${addBookToListResponse.msg}`);
+        return;
+      }
+
       const addBookToListResponse = await addBookToListRequest.json();
 
       if (addBookToListResponse.success) {
@@ -100,13 +107,19 @@ const ReadingList = ({ list }: ReadingListProps) => {
     if (deleteBookRequest.status === 200) {
       const deleteBookResponse = await deleteBookRequest.json();
 
-      if (!deleteBookResponse.success) return;
+      if (!deleteBookResponse.success) {
+        alert(`Error deleting book: \n ${deleteBookResponse.msg}`);
+        return;
+      };
 
       const currentBookIndex = books.findIndex((book) => book.id === deleteBookResponse.book.id);
       const booksCopy = [...books];
       booksCopy.splice(currentBookIndex, 1);
 
       setBooks(booksCopy);
+    } else {
+      const deleteBookResponse = await deleteBookRequest.json();
+      alert(`Error deleting book: \n ${deleteBookResponse.msg}`);
     }
   };
 
